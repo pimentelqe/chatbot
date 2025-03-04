@@ -38,7 +38,8 @@ Após a execução dos testes no modo **headless**, um vídeo será gerado autom
 
 ![Vídeo do Teste](cypress/videos/tracking.cy.js.mp4)
 
-⚠️ **Importante:** O GitHub não exibe vídeos diretamente no README. Para compartilhar, faça o upload do vídeo em uma plataforma como YouTube ou Google Drive e insira o link aqui.
+![](img/img-tst-chatBot.gif)
+
 
 ## 🛠️ Configuração Adicional
 Caso queira desativar a gravação de vídeos, edite o arquivo `cypress.config.js`:
