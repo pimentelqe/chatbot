@@ -1,80 +1,33 @@
 describe('consulta de encomenda no ChatBot', () => {
-  it('Deve indicar que a encomenda ja foi entregue', () => {
-    const codigoDeRastreio = 'PD123456785BR'
-    cy.abrirChatBot()
-
-    cy.verificarMensagem('Olá! Tudo bem? Posso te ajudar a consultar o status da sua encomenda?')
-
-    cy.selecionarOpcao('Sim, por favor!')
-
-    cy.verificarMensagem('Ótimo! Por favor, digite o código de rastreio da sua encomenda:')
-
-    cy.enviarMensagem(codigoDeRastreio)
-
-    cy.verificarMensagem(`Confirmando: você informou o código de rastreio ${codigoDeRastreio}. Está tudo certo?`)
-
-    cy.selecionarOpcao('Sim, está certo!')
-
-    cy.verificarMensagem('Perfeito! Estou consultando as informações nos Correios... Só um instante. 📦🔍')
-
-    cy.verificarMensagem(
-      'Boa notícia! Sua encomenda já foi entregue com sucesso. 🎉 Se precisar de algo mais, é só me chamar!',
-      7000
-
-    )
-
+  const cenarios = [
+    {titulo:'Deve indicar que a encomenda ja foi entregue',codigoDeRastreio: 'PD123456785BR', mesagemFinal: 'Boa notícia! Sua encomenda já foi entregue com sucesso. 🎉 Se precisar de algo mais, é só me chamar!'},
+    {titulo:'Deve indicar que a encomenda esta a caminho',codigoDeRastreio: 'BR987654321BR', mesagemFinal: 'A sua encomenda já foi despachada e está a caminho! 🚚 Prazo estimado: 5 dias úteis.'},
+    {titulo:'Deve indicar que a encomenda esta em rota de entrega',codigoDeRastreio: 'QW112233445BR', mesagemFinal: 'Ótima notícia! Sua encomenda está em rota de entrega e chega ainda hoje. Fique de olho! 👀📦'}
+  ]
+  cenarios.forEach(function(cenario){
+    it(cenario.titulo, () => {
+      cy.abrirChatBot()
+  
+      cy.verificarMensagem('Olá! Tudo bem? Posso te ajudar a consultar o status da sua encomenda?')
+  
+      cy.selecionarOpcao('Sim, por favor!')
+  
+      cy.verificarMensagem('Ótimo! Por favor, digite o código de rastreio da sua encomenda:')
+  
+      cy.enviarMensagem(cenario.codigoDeRastreio)
+  
+      cy.verificarMensagem(`Confirmando: você informou o código de rastreio ${cenario.codigoDeRastreio}. Está tudo certo?`)
+  
+      cy.selecionarOpcao('Sim, está certo!')
+  
+      cy.verificarMensagem('Perfeito! Estou consultando as informações nos Correios... Só um instante. 📦🔍')
+  
+      cy.verificarMensagem(
+        cenario.mesagemFinal,7000)  
+    })
+    
   })
-  it('Deve indicar que a encomenda esta a caminho', () => {
-    const codigoDeRastreio = 'BR987654321BR'
-    cy.abrirChatBot()
-  
-    cy.verificarMensagem('Olá! Tudo bem? Posso te ajudar a consultar o status da sua encomenda?')
-  
-    cy.selecionarOpcao('Sim, por favor!')
-  
-    cy.verificarMensagem('Ótimo! Por favor, digite o código de rastreio da sua encomenda:')
-  
-    cy.enviarMensagem(codigoDeRastreio)
-  
-    cy.verificarMensagem(`Confirmando: você informou o código de rastreio ${codigoDeRastreio}. Está tudo certo?`)
-  
-    cy.selecionarOpcao('Sim, está certo!')
-  
-    cy.verificarMensagem('Perfeito! Estou consultando as informações nos Correios... Só um instante. 📦🔍')
-  
-    cy.verificarMensagem(
-      'A sua encomenda já foi despachada e está a caminho! 🚚 Prazo estimado: 5 dias úteis.',
-      7000
-  
-    )
-  })
-  
-  it('Deve indicar que a encomenda esta em rota de entrega', () => {
-    const codigoDeRastreio = 'QW112233445BR'
-    cy.abrirChatBot()
-  
-    cy.verificarMensagem('Olá! Tudo bem? Posso te ajudar a consultar o status da sua encomenda?')
-  
-    cy.selecionarOpcao('Sim, por favor!')
-  
-    cy.verificarMensagem('Ótimo! Por favor, digite o código de rastreio da sua encomenda:')
-  
-    cy.enviarMensagem(codigoDeRastreio)
-  
-    cy.verificarMensagem(`Confirmando: você informou o código de rastreio ${codigoDeRastreio}. Está tudo certo?`)
-  
-    cy.selecionarOpcao('Sim, está certo!')
-  
-    cy.verificarMensagem('Perfeito! Estou consultando as informações nos Correios... Só um instante. 📦🔍')
-  
-    cy.verificarMensagem(
-      'Ótima notícia! Sua encomenda está em rota de entrega e chega ainda hoje. Fique de olho! 👀📦',
-      7000
-  
-    )
-  
-  
-  })
+
   
   it('Deve exibir erro para o codigo de rastreio não encontrado ', () => {
     const codigoDeRastreio = 'AB123456789XY'
