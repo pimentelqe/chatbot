@@ -6,7 +6,7 @@ package-lock.json
 
 # Cypress specific
 cypress/screenshots/
-cypress/videos/
+#cypress/videos/
 cypress/downloads/
 
 # Environment files

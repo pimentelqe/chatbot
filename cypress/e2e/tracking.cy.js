@@ -1,4 +1,4 @@
-describe('consulta de encomenda no ChatBot', () => {
+describe('Consulta de encomenda no ChatBot', () => {
   const cenarios = [
     {titulo:'Deve indicar que a encomenda ja foi entregue',codigoDeRastreio: 'PD123456785BR', mesagemFinal: 'Boa notícia! Sua encomenda já foi entregue com sucesso. 🎉 Se precisar de algo mais, é só me chamar!'},
     {titulo:'Deve indicar que a encomenda esta a caminho',codigoDeRastreio: 'BR987654321BR', mesagemFinal: 'A sua encomenda já foi despachada e está a caminho! 🚚 Prazo estimado: 5 dias úteis.'},
